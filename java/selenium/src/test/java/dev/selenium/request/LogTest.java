@@ -26,6 +26,9 @@ public class LogTest extends TestBase {
               return req;
             });
 
+    //    ((FirefoxDriver) driver).network().addRequestHandler(UrlPattern.ALL, req ->
+    // requests.add(req.getUri());
+
     driver.get("https://demo.playwright.dev/todomvc/");
 
     Assertions.assertEquals(5, requests.size());

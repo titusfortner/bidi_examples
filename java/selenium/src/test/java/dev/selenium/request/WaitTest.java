@@ -13,7 +13,15 @@ public class WaitTest extends TestBase {
   public void waitAndGetRequest() {
     startFirefox();
 
-    // Not implemented
+    //    UrlPattern filter = UrlPatternBuilder.setHost("httpbin.org").build();
+    //    Handler handler = ((FirefoxDriver) driver)
+    //            .network()
+    //            .addRequestHandler(filter, route -> {
+    //                if (route.request.resourceType() == ResourceType.IMAGE) {
+    //                    return route.complete();
+    //                } else {
+    //                    return route.next();
+    //            });
 
     driver.get("https://httpbin.org/forms/post");
     driver.findElement(By.name("custemail")).sendKeys("real@example.com");

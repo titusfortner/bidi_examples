@@ -16,17 +16,27 @@ public class AbortTest extends TestBase {
 
   @Test
   public void unconditionalAbort() {
-    // Not implemented
+    //    ((FirefoxDriver) driver).network().addRequestHandler(UrlPattern.ALL, route ->
+    // route.fail());
 
     driver.get("https://selenium.dev");
 
     WebElement svg = driver.findElement(By.cssSelector("svg"));
-    Assertions.assertTrue(svg.getSize().getHeight() > 30);
+    Assertions.assertTrue(svg.getSize().getHeight() > 30, "Not implemented yet");
   }
 
   @Test
   public void conditionalAbort() {
-    // Not implemented
+    //    ((FirefoxDriver) driver)
+    //        .network()
+    //        .addRequestHandler(
+    //            UrlPattern.ALL,
+    //            route -> {
+    //              if (route.request().resourceType() == ResourceType.IMAGE) {
+    //                return route.fail();
+    //              }
+    //              return route.next();
+    //            });
 
     driver.get("https://selenium.dev");
 

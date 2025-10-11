@@ -27,6 +27,19 @@ public class ModifyPostTest extends TestBase {
             req ->
                 req.setContent(Contents.utf8String(newContent))
                     .setHeader("Content-Length", String.valueOf(newContent.length())));
+
+    //    UrlPattern filter = UrlPatternBuilder.setHost("selenium.dev").setPath("/post").build();
+    //    ((FirefoxDriver) driver)
+    //        .network()
+    //        .addRequestHandler(
+    //            filter,
+    //            route ->
+    //                route.next(
+    //                    route
+    //                        .request()
+    //                        .setContent(Contents.utf8String(newContent))
+    //                        .setHeader("Content-Length", String.valueOf(newContent.length()))));
+
     driver.findElement(By.name("custemail")).sendKeys("real@example.com");
     driver.findElement(By.tagName("button")).click();
 
