@@ -1,0 +1,34 @@
+package dev.selenium.request;
+
+import dev.selenium.TestBase;
+import java.net.URI;
+import java.util.function.Predicate;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
+import org.openqa.selenium.firefox.FirefoxDriver;
+
+public class MultipleHandlersTest extends TestBase {
+
+  @Test
+  public void modifyMultiple() {
+    startFirefox();
+
+    Predicate<URI> filter = uri -> uri.getHost().equals("httpbin.org");
+
+    ((FirefoxDriver) driver)
+        .network()
+        .addRequestHandler(filter, req -> req.removeHeader("upgrade-insecure-requests"));
+
+    ((FirefoxDriver) driver)
+        .network()
+        .addRequestHandler(filter, req -> req.addHeader("X-Test", "true"));
+
+    driver.get("https://httpbin.org/headers");
+
+    String bodyText =
+        driver.findElement(org.openqa.selenium.By.tagName("body")).getText().replaceAll("\\s+", "");
+    Assertions.assertFalse(bodyText.contains("Upgrade-Insecure-Requests"));
+    Assertions.assertTrue(
+        bodyText.contains("\"X-Test\":\"true\""), "Does not yet support multiple handlers");
+  }
+}
