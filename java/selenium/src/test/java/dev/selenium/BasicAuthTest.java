@@ -13,6 +13,8 @@ public class BasicAuthTest extends TestBase {
         .network()
         .addAuthenticationHandler(new UsernameAndPassword("admin", "admin"));
 
+    //    driver.network().addAuthenticationHandler(UrlPattern.WEB, new UsernameAndPassword("admin", "admin"));
+
     driver.navigate().to("https://the-internet.herokuapp.com/basic_auth");
 
     Assertions.assertEquals(
