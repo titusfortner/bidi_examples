@@ -13,7 +13,6 @@ public class ModifyPostTest extends TestBase {
 
   @Test
   public void modifyPostBody() {
-    startFirefox();
     driver.get("https://httpbin.org/forms/post");
 
     Predicate<URI> filter =

@@ -13,7 +13,6 @@ public class LogTest extends TestBase {
 
   @Test
   public void logRequests() {
-    startFirefox();
     List<String> requests = new ArrayList<>();
 
     Predicate<URI> filter = uri -> true;
@@ -26,7 +25,7 @@ public class LogTest extends TestBase {
               return req;
             });
 
-    //    ((FirefoxDriver) driver).network().addRequestHandler(UrlPattern.ALL, req ->
+    //    ((FirefoxDriver) driver).network().addRequestHandler(UrlPattern.WEB, req ->
     // requests.add(req.getUri());
 
     driver.get("https://demo.playwright.dev/todomvc/");

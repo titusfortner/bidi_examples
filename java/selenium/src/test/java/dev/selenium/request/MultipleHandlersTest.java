@@ -11,8 +11,6 @@ public class MultipleHandlersTest extends TestBase {
 
   @Test
   public void modifyMultiple() {
-    startFirefox();
-
     Predicate<URI> filter = uri -> uri.getHost().equals("httpbin.org");
 
     ((FirefoxDriver) driver)

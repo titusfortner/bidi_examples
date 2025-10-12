@@ -12,7 +12,6 @@ public class ModifyHeaderTest extends TestBase {
 
   @Test
   public void addHeader() {
-    startFirefox();
     Predicate<URI> filter = uri -> uri.getHost().equals("httpbin.org");
 
     ((FirefoxDriver) driver)
@@ -32,7 +31,6 @@ public class ModifyHeaderTest extends TestBase {
 
   @Test
   public void removeHeader() {
-    startFirefox();
     Predicate<URI> filter = uri -> uri.getHost().equals("httpbin.org");
 
     ((FirefoxDriver) driver)
@@ -42,7 +40,7 @@ public class ModifyHeaderTest extends TestBase {
     //    UrlPattern filter = UrlPatternBuilder.setHost("httpbin.org").build();
     //    ((FirefoxDriver) driver)
     //        .network()
-    //        .addRequestHandler(
+    //        .addRequestHandler(filter,
     //            route -> route.next(route.request().removeHeader("upgrade-insecure-requests")));
 
     driver.get("https://httpbin.org/headers");

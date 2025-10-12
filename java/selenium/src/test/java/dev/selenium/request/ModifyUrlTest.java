@@ -7,43 +7,26 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.remote.http.Contents;
+import org.openqa.selenium.remote.http.HttpRequest;
 
 public class ModifyUrlTest extends TestBase {
 
   @Test
   public void redirectUrl() {
-    startFirefox();
-    driver.get("https://httpbin.org/forms/post");
+      Predicate<URI> filter = uri -> uri.getHost().equals("selenium.dev");
+      String url = "https://deploy-preview-2198--selenium-dev.netlify.app";
 
-    Predicate<URI> filter =
-        uri -> uri.getHost().equals("httpbin.org") && uri.getPath().equals("/post");
-    String newContent = "custname=&custtel=&custemail=fake@example.com&delivery=&comments=";
+      ((FirefoxDriver) driver)
+              .network()
+              .addRequestHandler(filter, req -> new HttpRequest(req.getMethod(), url));
 
-    ((FirefoxDriver) driver)
-        .network()
-        .addRequestHandler(
-            filter,
-            req ->
-                req.setContent(Contents.utf8String(newContent))
-                    .setHeader("Content-Length", String.valueOf(newContent.length())));
+      //    UrlPattern filter = UrlPatternBuilder.setHost("selenium.dev").build();
+      //    ((FirefoxDriver) driver).network().addRequestHandler(filter, route ->
+      // route.next(route.request().setUrl(url));
 
-    //    UrlPattern filter = UrlPatternBuilder.setHost("selenium.dev").setPath("/post").build();
-    //    ((FirefoxDriver) driver)
-    //        .network()
-    //        .addRequestHandler(
-    //            filter,
-    //            route ->
-    //                route.next(
-    //                    route
-    //                        .request()
-    //                        .setContent(Contents.utf8String(newContent))
-    //                        .setHeader("Content-Length", String.valueOf(newContent.length()))));
+      driver.get("https://selenium.dev");
 
-    driver.findElement(By.name("custemail")).sendKeys("real@example.com");
-    driver.findElement(By.tagName("button")).click();
-
-    Assertions.assertEquals(
-        "custemail \"fake@example.com\"", driver.findElement(By.id("/form/custemail")).getText());
+      String message = "Registrations Open for SeleniumConf 2025 | March 26–28 | Join Us In-Person! Register now!";
+      Assertions.assertEquals(message, driver.findElement(By.tagName("h4")).getText());
   }
 }

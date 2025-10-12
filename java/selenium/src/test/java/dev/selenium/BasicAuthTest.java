@@ -9,8 +9,6 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 public class BasicAuthTest extends TestBase {
   @Test
   public void basicAuthTest() {
-    startFirefox();
-
     ((FirefoxDriver) driver)
         .network()
         .addAuthenticationHandler(new UsernameAndPassword("admin", "admin"));

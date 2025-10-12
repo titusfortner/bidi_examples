@@ -93,6 +93,7 @@ Needs Fixing:
 * HttpRequest does not support modifying method
 * Intercept is currently always turned on globally regardless of whether there are handlers that need to be intercepted
 * We are filtering client side instead of with BiDi UrlPattern
+* We are intercepting all network traffic; we should default to just http/https/ws/wss unless the user specifies otherwise
 
 Not Working:
 

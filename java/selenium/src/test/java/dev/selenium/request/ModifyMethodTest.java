@@ -14,7 +14,6 @@ public class ModifyMethodTest extends TestBase {
 
   @Test
   public void modifyHttpMethod() {
-    startFirefox();
     Predicate<URI> filter = uri -> uri.getHost().equals("selenium.dev");
 
     ((FirefoxDriver) driver)

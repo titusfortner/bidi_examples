@@ -9,20 +9,16 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 
 public class AbortTest extends TestBase {
-  @BeforeEach
-  public void startDriver() {
-    startFirefox();
-  }
 
   @Test
   public void unconditionalAbort() {
-    //    ((FirefoxDriver) driver).network().addRequestHandler(UrlPattern.ALL, route ->
+    //    ((FirefoxDriver) driver).network().addRequestHandler(UrlPattern.WEB, route ->
     // route.fail());
 
     driver.get("https://selenium.dev");
 
     WebElement svg = driver.findElement(By.cssSelector("svg"));
-    Assertions.assertTrue(svg.getSize().getHeight() > 30, "Not implemented yet");
+    Assertions.assertTrue(svg.getSize().getHeight() > 30, "Abort not implemented yet");
   }
 
   @Test
@@ -30,7 +26,7 @@ public class AbortTest extends TestBase {
     //    ((FirefoxDriver) driver)
     //        .network()
     //        .addRequestHandler(
-    //            UrlPattern.ALL,
+    //            UrlPattern.WEB,
     //            route -> {
     //              if (route.request().resourceType() == ResourceType.IMAGE) {
     //                return route.fail();
@@ -44,6 +40,6 @@ public class AbortTest extends TestBase {
     Long naturalHeight =
         (Long)
             ((JavascriptExecutor) driver).executeScript("return arguments[0].naturalHeight", img);
-    Assertions.assertEquals(0L, naturalHeight, "Not implemented yet");
+    Assertions.assertEquals(0L, naturalHeight, "Abort not implemented yet");
   }
 }
