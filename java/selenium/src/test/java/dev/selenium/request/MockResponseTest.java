@@ -11,7 +11,7 @@ public class MockResponseTest extends TestBase {
   public void mockResponseBody() {
     //    String mockBody = "<h1>Mock Response</h1>";
     //    UrlPattern filter = UrlPattern.string(List.of("https://selenium.dev/"));
-    //    ((FirefoxDriver) driver).network().addRequestHandler(filter, route ->
+    //    driver.network().addRequestHandler(filter, route ->
     // route.response(mockBody));
 
     driver.get("https://selenium.dev/");

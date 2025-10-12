@@ -22,12 +22,12 @@ public class MultipleHandlersTest extends TestBase {
         .addRequestHandler(filter, req -> req.addHeader("X-Test", "true"));
 
     //    UrlPattern filter = UrlPatternBuilder.setHost("selenium.dev").build();
-    //    ((FirefoxDriver) driver)
+    //    driver
     //        .network()
     //        .addRequestHandler(filter, route -> route.next(route.request.addHeader("X-Test",
     // "true")));
     //
-    //    ((FirefoxDriver) driver)
+    //    driver
     //        .network()
     //        .addRequestHandler(
     //            filter, req ->

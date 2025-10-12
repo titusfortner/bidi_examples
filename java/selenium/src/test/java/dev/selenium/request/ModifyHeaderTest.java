@@ -19,7 +19,7 @@ public class ModifyHeaderTest extends TestBase {
         .addRequestHandler(filter, req -> req.addHeader("X-Test", "true"));
 
     //    UrlPattern filter = UrlPatternBuilder.setHost("httpbin.org").build();
-    //    ((FirefoxDriver) driver)
+    //    driver
     //        .network()
     //        .addRequestHandler(filter, route -> route.next(route.request().addHeader("X-Test",
     // "true")));
@@ -38,7 +38,7 @@ public class ModifyHeaderTest extends TestBase {
         .addRequestHandler(filter, req -> req.removeHeader("upgrade-insecure-requests"));
 
     //    UrlPattern filter = UrlPatternBuilder.setHost("httpbin.org").build();
-    //    ((FirefoxDriver) driver)
+    //    driver
     //        .network()
     //        .addRequestHandler(filter,
     //            route -> route.next(route.request().removeHeader("upgrade-insecure-requests")));

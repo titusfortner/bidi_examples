@@ -12,8 +12,7 @@ public class AbortTest extends TestBase {
 
   @Test
   public void unconditionalAbort() {
-    //    ((FirefoxDriver) driver).network().addRequestHandler(UrlPattern.WEB, route ->
-    // route.fail());
+    //    driver.network().addRequestHandler(UrlPattern.WEB, route -> route.fail());
 
     driver.get("https://selenium.dev");
 
@@ -23,7 +22,7 @@ public class AbortTest extends TestBase {
 
   @Test
   public void conditionalAbort() {
-    //    ((FirefoxDriver) driver)
+    //    driver
     //        .network()
     //        .addRequestHandler(
     //            UrlPattern.WEB,

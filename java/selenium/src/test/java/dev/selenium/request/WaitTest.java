@@ -30,7 +30,7 @@ public class WaitTest extends TestBase {
         });
 
     //    UrlPattern filter = UrlPatternBuilder.setHost("httpbin.org").build();
-    //    Handler registration = ((FirefoxDriver) driver)
+    //    Handler registration = driver
     //            .network()
     //            .addRequestHandler(filter, route -> {
     //                if (route.request.resourceType() == ResourceType.IMAGE) {

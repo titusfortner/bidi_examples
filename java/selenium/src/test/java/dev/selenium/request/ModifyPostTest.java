@@ -28,7 +28,7 @@ public class ModifyPostTest extends TestBase {
                     .setHeader("Content-Length", String.valueOf(newContent.length())));
 
     //    UrlPattern filter = UrlPatternBuilder.setHost("selenium.dev").setPath("/post").build();
-    //    ((FirefoxDriver) driver)
+    //    driver
     //        .network()
     //        .addRequestHandler(
     //            filter,

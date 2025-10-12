@@ -21,7 +21,7 @@ public class ModifyMethodTest extends TestBase {
         .addRequestHandler(filter, req -> new HttpRequest(HttpMethod.HEAD, req.getUri()));
 
     //    UrlPattern filter = UrlPatternBuilder.setHost("selenium.dev").build();
-    //    ((FirefoxDriver) driver).network().addRequestHandler(filter, route ->
+    //    driver.network().addRequestHandler(filter, route ->
     // route.next(route.request().setMethod("HEAD"));
 
     driver.get("https://selenium.dev");
