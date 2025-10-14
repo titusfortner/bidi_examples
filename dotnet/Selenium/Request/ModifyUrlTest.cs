@@ -17,10 +17,14 @@ public class ModifyUrlTest : TestBase
             await req.ContinueAsync(new ContinueRequestOptions { Url = url });
         });
 
+        // var options = new RequestInterceptOptions {
+        //               UrlPatterns = new List<UrlPattern> { new UrlPattern("https://www.selenium.dev/") },
+        //           };
         // await using var registration = await driver.Network.AddRequestHandlerAsync(
-        //     UrlPattern.ALL, route =>
+        //     options,
+        //     req =>
         //     {
-        //          return route.Next(new HttpRequest(route.Request) { Url = url })
+        //          req.Url = url;
         //      }
         // );
 

@@ -15,10 +15,14 @@ public class ModifyMethodTest : TestBase
             await req.ContinueAsync(new ContinueRequestOptions { Method = "HEAD" });
         });
 
+        // var options = new RequestInterceptOptions {
+        //               UrlPatterns = new List<UrlPattern> { new UrlPattern("https://www.selenium.dev/") },
+        //           };
         // await using var registration = await driver.Network.AddRequestHandlerAsync(
-        //     UrlPattern.ALL, route =>
+        //     options,
+        // .   req =>
         //     {
-        //          return route.Next(new HttpRequest(route.Request) { Method = "HEAD" })
+        //          req.Method = "HEAD";
         //      }
         // );
         

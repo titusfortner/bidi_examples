@@ -16,7 +16,8 @@ public class LogTest : TestBase
         });
 
         // await using var registration = await driver.Network.AddRequestHandlerAsync(
-        //     handler: req =>
+        //     ObserverOptionsBuilder.Defaults(),
+        //     req =>
         //     {
         //         requests.Add(req.Url)
         //     });

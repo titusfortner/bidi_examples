@@ -15,10 +15,7 @@ public class BasicAuthTest : TestBase
             await auth.ContinueAsync(new AuthCredentials("admin", "admin"));
         });
 
-        // await using var registration = await driver.Network.AddAuthenticationHandlerAsync(
-        //     UrlPattern.ALL,        
-        //     new AuthCredentials("admin", "admin")
-        // );
+        // await using var registration = await driver.Network.AddAuthenticationHandlerAsync("admin", "admin"));
 
         await Driver.Navigate().GoToUrlAsync("https://the-internet.herokuapp.com/basic_auth");
 

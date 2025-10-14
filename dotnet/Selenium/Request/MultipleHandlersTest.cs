@@ -26,23 +26,22 @@ public class MultipleHandlersTest : TestBase
             await req.ContinueAsync(new ContinueRequestOptions { Headers = headers! });
         });
 
+        // var options = new RequestInterceptOptions {
+        //               UrlPatterns = new List<UrlPattern> { new UrlPattern("https://httbin.org/") },
+        //           };
         // await using var registration1 = await driver.Network.AddRequestHandlerAsync(
-        //     UrlPattern.ALL,        
-        //     route =>
+        //     options,
+        //     req =>
         //     {
-        //          var headers = new List<Header?>(req.Request.Headers);
-        //          var remove = headers.Find(h => h?.Name == "Upgrade-Insecure-Requests");
-        //          headers.Remove(remove);
-        //          return route.Next( new HttpRequest(route.Request) { Headers = headers });
+        //          req.RemoveHeader("Upgrade-Insecure-Requests");
         //      }
         // );
 
         // await using var registration2 = await driver.Network.AddRequestHandlerAsync(
-        //     UrlPattern.ALL,        
-        //     route =>
+        //     options,
+        //     req =>
         //     {
-        //          var headers = new List<Header>(route.Request.Headers) { new("X-Test", "true") };
-        //          return route.Next( new HttpRequest(route.Request) { Headers = headers });
+        //          req.AddHeader("X-Test", "true");
         //      }
         // );
 

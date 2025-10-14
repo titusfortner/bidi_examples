@@ -22,14 +22,13 @@ public class AbortTest : TestBase
         });
 
         // await using var registration = await driver.Network.AddRequestHandlerAsync(
-        //     filters: UrlPattern.ALL,        
-        //     handler: route =>
+        //     RequestInterceptOptionsBuilder.Defaults(),
+        //     req =>
         //     {
-        //         if (route.Request.Url.EndsWith(".png")
+        //         if (req.Url.EndsWith(".png")
         //         {
-        //             return route.Fail();
+        //             req.Fail();
         //         }
-        //         return route.Next();
         //     });
 
         await Driver.Navigate().GoToUrlAsync("https://selenium.dev");

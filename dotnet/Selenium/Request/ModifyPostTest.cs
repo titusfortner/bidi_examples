@@ -1,4 +1,4 @@
-using System.Text;
+    using System.Text;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using OpenQA.Selenium;
 using OpenQA.Selenium.BiDi.Network;
@@ -35,26 +35,23 @@ public class ModifyPostTest : TestBase
             }
         });
 
-        
+        // var options = new RequestInterceptOptions {
+        //    UrlPatterns = new List<UrlPattern> {
+        //        new UrlPattern(new Dictionary<string, string> {
+        //            { "hostname", "httpbin.org" },
+        //            { "path", "post/"}
+        //        })
+        //    }
+        // };
         // await using var registration = await driver.Network.AddRequestHandlerAsync(
-        //     filters: UrlPattern.ALL,        
-        //     handler: route =>
+        //     options,
+        //     req =>
         //     {
-        //          if (req.Request.Url.Contains("httpbin.org/post"))
+        //          if (req.Method == "POST")
         //          {
-        //              var headers = new List<Header?>(req.Request.Headers);
-        //              var remove = headers.Find(h => h?.Name == "Content-Length");
-        //              headers.Remove(remove);
-        //              headers.Add(new Header("Content-Length", byteLen.ToString()));
-        //
-        //              return route.Next(new HttpRequest(route.Request) { Body = bodyAsBase64, Headers = headers })
-        //          }
-        //          else
-        //          {
-        //              return route.Next();
+        //              req.Content = newContent
         //          }
         //     });
-        
 
         Driver.FindElement(By.Name("custemail")).SendKeys("real@example.com");
         Driver.FindElement(By.TagName("button")).Click();

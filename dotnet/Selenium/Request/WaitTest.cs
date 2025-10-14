@@ -22,15 +22,17 @@ public class WaitTest : TestBase
             await req.ContinueAsync();
         });
 
+        // var options = new RequestInterceptOptions {
+        //               UrlPatterns = new List<UrlPattern> { new UrlPattern("https://www.selenium.dev/") },
+        //           };
         // await using var registration = await driver.Network.AddRequestHandlerAsync(
-        //     filters: UrlPattern.ALL,        
-        //     handler: route =>
+        //     options,
+        //     req =>
         //     {
-        //         if (route.Request.Url.EndsWith(".png")
+        //         if (req.Url.EndsWith(".png")
         //         {
-        //             return route.Complete();
+        //             req.Complete();
         //         }
-        //         return route.Next();
         //     });
 
         await Driver.Navigate().GoToUrlAsync("https://selenium.dev");

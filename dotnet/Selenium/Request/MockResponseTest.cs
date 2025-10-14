@@ -16,11 +16,14 @@ public class MockResponseTest : TestBase
             await req.ProvideResponseAsync(new() { Body = mockBody });
         });
 
+        // var options = new RequestInterceptOptions {
+        //               UrlPatterns = new List<UrlPattern> { new UrlPattern("https://selenium.dev/") },
+        //           };
         // await using var registration = await driver.Network.AddRequestHandlerAsync(
-        //     filters: UrlPattern.ALL,        
-        //     handler: route =>
+        //     options,
+        //     req =>
         //     {
-        //         return route.Respond(route.Request.Body = mockBody);
+        //         req.Body = mockBody);
         //     });
         
         await Driver.Navigate().GoToUrlAsync("https://selenium.dev/");
