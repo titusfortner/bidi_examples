@@ -2,7 +2,7 @@ from selenium.webdriver.common.by import By
 
 
 def test_unconditional_abort(driver):
-    # driver.network.add_request_handler(filters=[], handler=lambda route: route.fail())
+    # driver.network.add_request_handler(filters=[], handler=lambda req: req.fail())
 
     driver.get("https://selenium.dev")
 
