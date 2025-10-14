@@ -22,7 +22,7 @@ public class AbortTest : TestBase
         });
 
         // await using var registration = await driver.Network.AddRequestHandlerAsync(
-        //     RequestInterceptOptionsBuilder.Defaults(),
+        //     new RequestInterceptOptions(),
         //     req =>
         //     {
         //         if (req.Url.EndsWith(".png")
