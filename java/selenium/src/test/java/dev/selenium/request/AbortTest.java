@@ -2,7 +2,6 @@ package dev.selenium.request;
 
 import dev.selenium.TestBase;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -12,7 +11,7 @@ public class AbortTest extends TestBase {
 
   @Test
   public void unconditionalAbort() {
-    //    driver.network().addRequestHandler(UrlPattern.WEB, route -> route.fail());
+    //    driver.network().addRequestHandler(RequestInterceptOptions.createDefaultOptions(), req -> req.fail());
 
     driver.get("https://selenium.dev");
 
@@ -25,12 +24,11 @@ public class AbortTest extends TestBase {
     //    driver
     //        .network()
     //        .addRequestHandler(
-    //            UrlPattern.WEB,
-    //            route -> {
-    //              if (route.request().resourceType() == ResourceType.IMAGE) {
-    //                return route.fail();
+    //            RequestInterceptOptions.createDefaultOptions(),
+    //            req -> {
+    //              if (req.resourceType() == ResourceType.IMAGE) {
+    //                req.fail();
     //              }
-    //              return route.next();
     //            });
 
     driver.get("https://selenium.dev");

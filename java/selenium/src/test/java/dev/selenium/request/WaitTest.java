@@ -22,21 +22,22 @@ public class WaitTest extends TestBase {
 
     ((FirefoxDriver) driver)
         .network()
-        .addRequestHandler(filter, req -> {
-            if (req.getUri().contains("png")) {
+        .addRequestHandler(
+            filter,
+            req -> {
+              if (req.getUri().contains("png")) {
                 request.set(req);
-            }
-            return req;
-        });
+              }
+              return req;
+            });
 
-    //    UrlPattern filter = UrlPatternBuilder.setHost("httpbin.org").build();
+    // .  RequestInterceptOptions options =
+    // RequestInterceptOptionsBuilder.addFilter(Map.of("host", "httpbin.org").build();
     //    Handler registration = driver
     //            .network()
-    //            .addRequestHandler(filter, route -> {
-    //                if (route.request.resourceType() == ResourceType.IMAGE) {
-    //                    return route.complete();
-    //                } else {
-    //                    return route.next();
+    //            .addRequestHandler(options, req -> {
+    //                if (req.resourceType() == ResourceType.IMAGE) {
+    //                    req.finish()
     //            });
 
     driver.get("https://selenium.dev");
@@ -46,7 +47,8 @@ public class WaitTest extends TestBase {
     // It returned something
     wait.until(d -> request.get() != null);
     // It returned the first thing
-    Assertions.assertTrue(request.get().getUri().contains("sponsors"), "It did not return the first thing");
+    Assertions.assertTrue(
+        request.get().getUri().contains("sponsors"), "It did not return the first thing");
 
     // HttpRequest request = wait.until(d -> registration.getResult());
     // Assertions.assertTrue(request.getUri().contains("sponsors"));

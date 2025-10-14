@@ -20,9 +20,9 @@ public class ModifyUrlTest extends TestBase {
               .network()
               .addRequestHandler(filter, req -> new HttpRequest(req.getMethod(), url));
 
-      //    UrlPattern filter = UrlPatternBuilder.setHost("selenium.dev").build();
-      //    driver.network().addRequestHandler(filter, route ->
-      // route.next(route.request().setUrl(url));
+      // .  RequestInterceptOptions options =
+      // RequestInterceptOptionsBuilder.addFilter(Map.of("host", "selenium.dev").build();
+      //    driver.network().addRequestHandler(options, req -> req.setUrl(url));
 
       driver.get("https://selenium.dev");
 

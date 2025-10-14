@@ -20,9 +20,9 @@ public class ModifyMethodTest extends TestBase {
         .network()
         .addRequestHandler(filter, req -> new HttpRequest(HttpMethod.HEAD, req.getUri()));
 
-    //    UrlPattern filter = UrlPatternBuilder.setHost("selenium.dev").build();
-    //    driver.network().addRequestHandler(filter, route ->
-    // route.next(route.request().setMethod("HEAD"));
+      // .  RequestInterceptOptions options =
+      // RequestInterceptOptionsBuilder.addFilter(Map.of("host", "httpbin.org").build();
+    //    driver.network().addRequestHandler(options, req -> req.setMethod("HEAD"));
 
     driver.get("https://selenium.dev");
 

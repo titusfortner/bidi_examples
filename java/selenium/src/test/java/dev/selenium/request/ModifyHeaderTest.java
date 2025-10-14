@@ -18,11 +18,11 @@ public class ModifyHeaderTest extends TestBase {
         .network()
         .addRequestHandler(filter, req -> req.addHeader("X-Test", "true"));
 
-    //    UrlPattern filter = UrlPatternBuilder.setHost("httpbin.org").build();
+    // .  RequestInterceptOptions options =
+    // RequestInterceptOptionsBuilder.addFilter(Map.of("host", "httpbin.org").build();
     //    driver
     //        .network()
-    //        .addRequestHandler(filter, route -> route.next(route.request().addHeader("X-Test",
-    // "true")));
+    //        .addRequestHandler(options, req -> req.addHeader("X-Test", "true")));
 
     driver.get("https://httpbin.org/headers");
     Assertions.assertEquals(
@@ -37,11 +37,11 @@ public class ModifyHeaderTest extends TestBase {
         .network()
         .addRequestHandler(filter, req -> req.removeHeader("upgrade-insecure-requests"));
 
-    //    UrlPattern filter = UrlPatternBuilder.setHost("httpbin.org").build();
+    // .  RequestInterceptOptions options =
+    // RequestInterceptOptionsBuilder.addFilter(Map.of("host", "httpbin.org").build();
     //    driver
     //        .network()
-    //        .addRequestHandler(filter,
-    //            route -> route.next(route.request().removeHeader("upgrade-insecure-requests")));
+    //        .addRequestHandler(options, req-> req.removeHeader("upgrade-insecure-requests"));
 
     driver.get("https://httpbin.org/headers");
 

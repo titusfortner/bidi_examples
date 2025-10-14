@@ -7,66 +7,56 @@ There is an example project of real-world use cases for both Playwright and Sele
 
 1. `addRequestHandler()` returns a `Registration` instance instead of just an id that has:
     * `remove()`
-    * `isComplete()`
     * `getResult()`
-    * `dispose()`
+    * `isComplete()` (maybe?)
+    * `dispose()` (maybe?)
 
-2. Overload `addRequestHandler()` with these parameter signatures:
+2. Overload `addRequestHandler()` with these 2 parameter signatures:
     ```java
-    public Registration addRequestHandler(Consumer<HttpRequest> handler);
-    public Registration addRequestHandler(List<UrlPattern> filters, UnaryOperator<RequestRoute> handler);
+    public Registration addRequestHandler(ObserveOptions options, Consumer<ObservedRequest> handler);
+    public Registration addRequestHandler(RequestInterceptOptions options, Consumer<PausedRequset> handler);
     ```
-    * `Consumer` does not allow a return value and is only for observation
-    * `UnaryOperator` requires users to explicitly call a method on request route to return a `RequestRoute` instance
-    * BiDi filters are only supported for Interception, so this is an easy way to disambiguate the overloads
-    * Any client-side filtering can be done inside the function body
+    * `Consumer` means no return values, everything is from side effects.
+    * ObserveOptions should work for Requests and Responses, just contains collectRequestBody
+    * RequestInterceptOptions: collectRequestBody, urlPatterns, likely eventually will include timeouts, audit settings, priorities, etc
+    * ObservedRequest - a read-only wrapper of the HttpRequest object
+    * PausedRequest - a wrapper of HttpRequest object that delegates to HttpRequest class as necessary, but has additional
+        methods change and record state for the Dispatcher code 
 
-3. Multiple handlers are managed LIFO (Last In First Out), similar to Playwright
-    * Interceptors are evaluated in reverse registration order (newest first).
-    * `RequestRoute` methods manages how the requests terminates or continues
+3. The Dispatcher code (however implemented) iterates over the intercept handlers (LIFO), 
+    before each handler it collects the body if the options for that handler says to do so,
+    after the handler runs, it checks for terminal state, to exit, else continue iterating over intercept handlers
+    after last intercept handler with no terminal conditions, calls continueRequest, then iterates over observers
 
-4. `RequestRoute` manages how individual requests are routed, this is also what playwright does; 
-    the request is stored in the route and the user must pick which action to return where
+4. `complete()` is called if the purpose of the handler was to find a specific matching request. So the first 
+    match calls complete() and the handler is now completely unnecessary. The Dispatch code will check for it as
+    a terminal state and update the Registration instance with the result, 
+    and have it remove() itself in whatever atomic/idempotent way,
 
-5. `RequestRoute` Methods:
-    * `fail()` same as playwright `abort()` but matches bidi spec "failRequest"
-    * `respond()` same as playwright `fulfill()` but matches bidi spec "provideResponse"
-    * `next()` same as playwright `fallback()`, the bidi "continueRequest" will be an implementation detail of this
-    * `complete()` - this will remove the handler from bidi handlers list entirely and store the request for retrieval
-    * `continueRequest()` - (optional); it's the original playwright behavior that will skip other handlers and call the
-      bidi "continueRequest" immediately
-    * default: returning without calling any of those methods is the same as calling `next()` with the original request
-
-6. The `complete()` implementation is tricky. The idea is for when you need the first matching of a thing 
-    and after that you don't need to keep looking. So `RequestRoute` stores the instance of the 
-    `Registration` managing the handler, has it remove() itself in whatever atomic/idempotent way,
-    then store the request as the result in the `Registration` instance
-
-
-7. Examples are mostly one-liners:
+5. Examples are mostly one-liners:
     ```java
     Network nw = driver.network();
-    nw.addRequestHandler(filter, route -> route.next(route.request().removeHeader("upgrade-insecure-requests")));
-    nw.addRequestHandler(filter, route -> route.next(route.request().setMethod("HEAD"));
-    nw.addRequestHandler(filter, route -> route.fail());
+    RequestInterceptOptions options = RequestInterceptOptions.createDefaultOptions();
+    ```
+    nw.addRequestHandler(options, req -> req.removeHeader("upgrade-insecure-requests"));
+    nw.addRequestHandler(options, req -> req.setMethod("HEAD"));
+    nw.addRequestHandler(options, req -> req.fail());
     ```
 
-8. Waiting and Returning values
+6. Waiting and Returning values
     ```java
     Registration registration = driver
             .network()
-            .addRequestHandler(UrlPattern.ALL, route -> {
-              if (route.request().resourceType() == ResourceType.IMAGE) {
-                return route.complete();
-              }
-              return;
-            });
+            .addRequestHandler(RequestInterceptOptions.createDefaultOptions(), 
+                              req -> {
+                                  if (req.resourceType() == ResourceType.IMAGE) {
+                                    req.complete();
+                                  }});
     driver.get("https://selenium.dev");
     HttpRequest request = wait.until(() -> registration.getResult());
     ```
 
-   This is "more selenium" by allowing the use of existing waits and existing handler signatures, but much more verbose than the
-   equivalent playwright:
+   This is the equivalent code in Playwright, which is obviously more succinct:
    ```java
     Request request =
         page.waitForRequest(

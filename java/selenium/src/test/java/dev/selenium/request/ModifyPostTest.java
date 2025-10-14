@@ -17,27 +17,22 @@ public class ModifyPostTest extends TestBase {
 
     Predicate<URI> filter =
         uri -> uri.getHost().equals("httpbin.org") && uri.getPath().equals("/post");
-    String newContent = "custname=&custtel=&custemail=fake@example.com&delivery=&comments=";
+    String contentString = "custname=&custtel=&custemail=fake@example.com&delivery=&comments=";
 
     ((FirefoxDriver) driver)
         .network()
         .addRequestHandler(
             filter,
             req ->
-                req.setContent(Contents.utf8String(newContent))
-                    .setHeader("Content-Length", String.valueOf(newContent.length())));
+                req.setContent(Contents.utf8String(contentString))
+                    .setHeader("Content-Length", String.valueOf(contentString.length())));
 
-    //    UrlPattern filter = UrlPatternBuilder.setHost("selenium.dev").setPath("/post").build();
+    // .  RequestInterceptOptions options =
+    // RequestInterceptOptionsBuilder.addFilter(Map.of("host", "httpbin.org", "path",
+    // "/post").build();
     //    driver
     //        .network()
-    //        .addRequestHandler(
-    //            filter,
-    //            route ->
-    //                route.next(
-    //                    route
-    //                        .request()
-    //                        .setContent(Contents.utf8String(newContent))
-    //                        .setHeader("Content-Length", String.valueOf(newContent.length()))));
+    //        .addRequestHandler(options, req -> req.setContent(newContent));
 
     driver.findElement(By.name("custemail")).sendKeys("real@example.com");
     driver.findElement(By.tagName("button")).click();

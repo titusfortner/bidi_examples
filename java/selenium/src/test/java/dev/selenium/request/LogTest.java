@@ -25,7 +25,7 @@ public class LogTest extends TestBase {
               return req;
             });
 
-    //    driver.network().addRequestHandler(UrlPattern.WEB, req ->
+    //    driver.network().addRequestHandler(ObserverOptions.createDefaultOptions(), req ->
     // requests.add(req.getUri());
 
     driver.get("https://demo.playwright.dev/todomvc/");
