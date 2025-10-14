@@ -31,8 +31,9 @@ public class TestBase
     }
 
     [TestCleanup]
-    public void CloseContext()
+    public async Task CloseContext()
     {
+        await BiDi.DisposeAsync();
         Driver.Quit();
     }
 }
